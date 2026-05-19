@@ -4,8 +4,9 @@ const APP = {
   momoNetwork: "TELECEL",
   momoNumber: "0209716172",
   otherCurrencyText: "Will be added soon",
-  apiBase: "",
-  maxUploadMB: 5
+  apiBase: "http://localhost:3000",
+  maxUploadMB: 5,
+  hcaptchaSiteKey: "9414097e-f742-4dd0-9950-c944e564e766"
 };
 
 const state = {
@@ -162,36 +163,57 @@ function logout() {
   location.href = "index.html";
 }
 
+async function getCaptchaToken() {
+  if (!window.hcaptcha) return "";
+  return window.hcaptcha.getResponse();
+}
+
+function resetCaptcha() {
+  if (window.hcaptcha) {
+    try {
+      window.hcaptcha.reset();
+    } catch {}
+  }
+}
+
 async function signup(e) {
   e.preventDefault();
-
   const form = e.target;
   const fd = new FormData(form);
   const payload = Object.fromEntries(fd.entries());
 
+  payload.hcaptchaToken = await getCaptchaToken();
+  if (!payload.hcaptchaToken) return toast("Please complete the captcha.", true);
+
   try {
     const data = await api("/api/auth/signup", "POST", payload);
     setSession(data.user, data.token);
+    resetCaptcha();
     toast("Account created successfully.");
     location.href = "index.html";
   } catch (err) {
+    resetCaptcha();
     toast(err.message, true);
   }
 }
 
 async function login(e) {
   e.preventDefault();
-
   const form = e.target;
   const fd = new FormData(form);
   const payload = Object.fromEntries(fd.entries());
 
+  payload.hcaptchaToken = await getCaptchaToken();
+  if (!payload.hcaptchaToken) return toast("Please complete the captcha.", true);
+
   try {
     const data = await api("/api/auth/login", "POST", payload);
     setSession(data.user, data.token);
+    resetCaptcha();
     toast("Welcome back.");
     location.href = "index.html";
   } catch (err) {
+    resetCaptcha();
     toast(err.message, true);
   }
 }
@@ -203,9 +225,33 @@ function formatCurrencyInput(input) {
   });
 }
 
+function renderCaptcha(containerId = "hcaptchaBox") {
+  const box = document.getElementById(containerId);
+  if (!box || !window.hcaptcha) return;
+  if (box.dataset.rendered === "1") return;
+
+  window.hcaptcha.render(box, {
+    sitekey: APP.hcaptchaSiteKey
+  });
+  box.dataset.rendered = "1";
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   paintShell();
   await refreshWallet();
-
   document.querySelectorAll("[data-format-currency]").forEach(el => formatCurrencyInput(el));
+  renderCaptcha();
 });
+
+window.APP = APP;
+window.state = state;
+window.api = api;
+window.toast = toast;
+window.paintShell = paintShell;
+window.refreshWallet = refreshWallet;
+window.requireAuth = requireAuth;
+window.logout = logout;
+window.signup = signup;
+window.login = login;
+window.renderCaptcha = renderCaptcha;
+window.resetCaptcha = resetCaptcha;
