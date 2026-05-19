@@ -1,28 +1,55 @@
-import dotenv from "dotenv";
-dotenv.config();
-import express from "express";
-import cors from "cors";
-import { initDb, seedAdmin } from "./db.js";
-import authRoutes from "./routes/auth.js";
-import walletRoutes from "./routes/wallet.js";
-import paymentRoutes from "./routes/payments.js";
-import withdrawalRoutes from "./routes/withdrawals.js";
-import gameRoutes from "./routes/games.js";
+require("dotenv").config();
 
-initDb();
-await seedAdmin();
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
+
+const authRoutes = require("./routes/auth");
+const walletRoutes = require("./routes/wallet");
+const depositRoutesFactory = require("./routes/deposits");
 
 const app = express();
-app.use(cors({ origin:true, credentials:true }));
-app.use(express.json());
-app.use(express.urlencoded({ extended:true }));
+const PORT = process.env.PORT || 3000;
+const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "*";
+const UPLOAD_DIR = path.join(__dirname, "uploads");
 
-app.get("/health", (_,res)=>res.send("ok"));
+if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+
+const storage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, UPLOAD_DIR),
+  filename: (_req, file, cb) => {
+    const safe = file.originalname.replace(/[^w.-]/g, "_").replace(/s+/g, "_");
+    cb(null, `${Date.now()}_${safe}`);
+  }
+});
+
+const upload = multer({
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (_req, file, cb) => {
+    const ok = ["image/png", "image/jpeg", "image/jpg", "image/webp"].includes(file.mimetype);
+    cb(ok ? null : new Error("Only JPG, PNG, or WEBP images are allowed."), ok);
+  }
+});
+
+app.use(cors({ origin: FRONTEND_ORIGIN === "*" ? true : FRONTEND_ORIGIN }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static(UPLOAD_DIR));
+
+app.get("/health", (_req, res) => {
+  res.json({ ok: true, service: "Rally Casino API" });
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/wallet", walletRoutes);
-app.use("/api/payments", paymentRoutes);
-app.use("/api/withdrawals", withdrawalRoutes);
-app.use("/api/games", gameRoutes);
+app.use("/api/deposits", depositRoutesFactory(upload));
 
-const port = process.env.PORT || 3000;
-app.listen(port, ()=>console.log(`Server running on ${port}`));
+app.use((err, _req, res, _next) => {
+  if (!err) return res.status(500).json({ error: "Unknown error" });
+  res.status(400).json({ error: err.message || "Request failed" });
+});
+
+app.listen(PORT, () => console.log(`Rally Casino backend running on ${PORT}`));
