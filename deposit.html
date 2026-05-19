@@ -18,14 +18,13 @@
         <span>deposit</span>
       </div>
     </div>
-
     <div class="navlinks">
       <a href="index.html">Home</a>
+      <a href="games.html">Games</a>
       <a class="active" href="deposit.html">Deposit</a>
-      <a href="login.html">Login</a>
-      <a href="signup.html">Sign up</a>
+      <a href="withdraw.html">Withdraw</a>
+      <a href="history.html">History</a>
     </div>
-
     <div class="wallet">
       <span class="pill" id="userText">Guest</span>
       <span><b id="balanceText">GHS 0.00</b></span>
@@ -33,93 +32,42 @@
   </div>
 
   <div class="container">
-    <div class="game-shell">
-      <div class="game-stage cinematic-glow">
+    <section class="hero">
+      <div class="card hero-main cinematic-glow">
         <div class="kicker">Wallet top up</div>
-        <h1 style="margin:12px 0 10px">Deposit with Telecel</h1>
-        <p style="color:var(--muted);max-width:68ch;line-height:1.75">
-          Send your payment to <b data-momo-network>TELECEL</b> MoMo number
-          <b data-momo-number>0209716172</b>, then submit the transaction ID and a screenshot.
-          All deposits stay pending until approved.
-        </p>
+        <h1>Deposit with Telecel</h1>
+        <p>Send payment to <b data-momo-network>TELECEL</b> number <b data-momo-number>0209716172</b>, then submit the transaction ID and screenshot. All deposits stay pending until approved.</p>
+        <div class="notice" style="margin-top:18px">Currency: <b data-currency>GHS</b> only. <span data-other-currency>Will be added soon</span>.</div>
+      </div>
 
-        <div class="notice" style="margin-top:18px">
-          Currency: <b data-currency>GHS</b> only. <span data-other-currency>Will be added soon</span>.
-        </div>
-
-        <form id="depositForm" class="deposit-box" style="margin-top:18px">
+      <div class="card panel cinematic-glow">
+        <h2 style="margin-top:0">Deposit</h2>
+        <form id="depositForm" class="deposit-box">
           <div class="two">
             <input class="field" type="number" name="amount" min="1" step="0.01" placeholder="Deposit amount (GHS)" required />
             <input class="field" type="text" name="txId" placeholder="Transaction ID / Reference" required />
           </div>
-
           <input class="field" type="text" name="senderName" placeholder="Sender name on payment" required />
           <input class="field" type="tel" name="senderPhone" placeholder="Sender phone number" required />
-
           <div class="file-zone">
-            <label for="screenshot" style="font-weight:800;display:block;margin-bottom:8px">
-              Upload deposit screenshot
-            </label>
-            <input
-              id="screenshot"
-              class="field"
-              type="file"
-              name="screenshot"
-              accept="image/png,image/jpeg,image/jpg,image/webp"
-              required
-            />
-            <div class="file-note">
-              JPG, PNG, or WEBP only. Maximum size: <b>5 MB</b>.
-            </div>
+            <label for="screenshot" style="font-weight:800;display:block;margin-bottom:8px">Upload deposit screenshot</label>
+            <input class="field" id="screenshot" type="file" name="screenshot" accept="image/png,image/jpeg,image/jpg,image/webp" required />
+            <div class="file-note">JPG, PNG, or WEBP only. Maximum size: <b>5 MB</b>.</div>
             <img id="preview" class="preview" alt="Screenshot preview" />
           </div>
-
           <div id="hcaptchaBox" class="h-captcha" data-theme="dark"></div>
-
           <textarea class="field" name="note" placeholder="Optional note for admin review"></textarea>
-
           <button class="btn btn-primary" type="submit">Submit deposit</button>
-
-          <div class="small">
-            After submission, your deposit will show as <b>pending</b> until manual approval.
-          </div>
+          <div class="small">After submission, your deposit will show as <b>pending</b> until manual approval.</div>
         </form>
       </div>
-
-      <div class="side-stack">
-        <div class="card panel cinematic-glow">
-          <h3>Deposit rules</h3>
-          <p class="small">
-            1. Pay to <b data-momo-number>0209716172</b><br />
-            2. Enter the transaction ID<br />
-            3. Upload a screenshot<br />
-            4. Wait for approval
-          </p>
-        </div>
-
-        <div class="card panel cinematic-glow">
-          <h3>Current wallet</h3>
-          <div class="notice">Balance: <b id="pendingText">GHS 0.00</b></div>
-          <p class="small" style="margin-top:12px">
-            Pending deposits are not spendable yet.
-          </p>
-        </div>
-
-        <div class="card panel cinematic-glow">
-          <h3>Need help?</h3>
-          <p class="small">
-            Make sure the screenshot clearly shows the payment amount, time, and reference.
-          </p>
-        </div>
-      </div>
-    </div>
+    </section>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("depositForm");
-      if (form) form.addEventListener("submit", window.handleDepositSubmit);
-      renderCaptcha("hcaptchaBox");
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('depositForm')?.addEventListener('submit', handleDepositSubmit);
+      renderCaptcha('hcaptchaBox');
     });
   </script>
 </body>
