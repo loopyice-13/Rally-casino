@@ -1,50 +1,55 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Withdraw</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Withdraw • Rally Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+  <script src="withdraw.js" defer></script>
 </head>
 <body>
-  <div class="nav">
-    <div class="brand"><div class="brand-badge">♠</div><div>Casino Royale</div></div>
-    <div class="navlinks">
-      <a href="index.html">Home</a><a href="lobby.html">Lobby</a>
-      <a href="deposit.html">Deposit</a><a class="active" href="withdraw.html">Withdraw</a>
+  <div class="nav cinematic-glow">
+    <div class="brand">
+      <div class="brand-badge">♠</div>
+      <div class="brand-title">
+        <div data-site-name>Rally Casino</div>
+        <span>withdraw</span>
+      </div>
     </div>
-    <div class="wallet"><span>Balance: <b id="balanceText">GHS 0.00</b></span></div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="deposit.html">Deposit</a>
+      <a class="active" href="withdraw.html">Withdraw</a>
+      <a href="history.html">History</a>
+    </div>
+    <div class="wallet">
+      <span class="pill" id="userText">Guest</span>
+      <span><b id="balanceText">GHS 0.00</b></span>
+    </div>
   </div>
+
   <div class="container">
-    <div class="game-shell">
-      <div class="game-stage">
-        <h2>Withdraw Funds</h2>
-        <p style="color:var(--muted)">Withdrawals are requests first, then approved in the backend admin panel.</p>
-        <form class="form" id="withdrawForm">
-          <div class="two">
-            <input class="field" type="number" name="amount" min="10" placeholder="Amount in GHS" required>
-            <select class="field" name="method">
-              <option value="momo">Mobile Money</option>
-              <option value="bank">Bank Transfer</option>
-            </select>
-          </div>
-          <input class="field" name="accountName" placeholder="Account name" required>
-          <input class="field" name="accountNumber" placeholder="Account number" required>
-          <input class="field" name="reference" placeholder="Reference note">
-          <button class="btn btn-primary" type="submit">Request Withdrawal</button>
+    <section class="hero">
+      <div class="card hero-main cinematic-glow">
+        <div class="kicker">Cash out</div>
+        <h1>Withdraw funds</h1>
+        <p>Submit your payout request and track the status in history.</p>
+      </div>
+
+      <div class="card panel cinematic-glow">
+        <form id="withdrawForm" class="form">
+          <input class="field" name="amount" type="number" min="1" step="0.01" placeholder="Withdrawal amount" required />
+          <input class="field" name="method" placeholder="Method: MoMo or Bank" required />
+          <input class="field" name="accountName" placeholder="Account name" required />
+          <input class="field" name="accountNumber" placeholder="Account number / wallet number" required />
+          <input class="field" name="network" placeholder="Network / bank (optional)" />
+          <textarea class="field" name="note" placeholder="Optional note"></textarea>
+          <button class="btn btn-primary" type="submit">Submit withdrawal</button>
         </form>
       </div>
-      <div class="card side-card">
-        <h3>Withdrawal rules</h3>
-        <ul style="color:var(--muted);line-height:1.9;padding-left:18px">
-          <li>Minimum withdrawal: GHS 10</li>
-          <li>KYC recommended before approval</li>
-          <li>Admin can approve pending requests</li>
-        </ul>
-      </div>
-    </div>
+    </section>
   </div>
-  <script src="app.js"></script>
-  <script src="withdraw.js"></script>
 </body>
 </html>
