@@ -3,53 +3,159 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Casino Royale</title>
+  <title>Rally Casino</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="nav">
-    <div class="brand"><div class="brand-badge">♠</div><div>Casino Royale</div></div>
+  <div class="nav cinematic-glow">
+    <div class="brand">
+      <div class="brand-badge">♠</div>
+      <div class="brand-title">
+        <div data-site-name>Rally Casino</div>
+        <span>cinematic mvp</span>
+      </div>
+    </div>
+
     <div class="navlinks">
       <a class="active" href="index.html">Home</a>
-      <a href="signup.html">Sign up</a>
-      <a href="login.html">Login</a>
-      <a href="lobby.html">Lobby</a>
       <a href="deposit.html">Deposit</a>
-      <a href="withdraw.html">Withdraw</a>
+      <a href="login.html">Login</a>
+      <a href="signup.html">Sign up</a>
     </div>
+
     <div class="wallet">
       <span class="pill" id="userText">Guest</span>
-      <span>Balance: <b id="balanceText">GHS 0.00</b></span>
+      <span><b id="balanceText">GHS 0.00</b></span>
     </div>
   </div>
 
   <div class="container">
     <section class="hero">
-      <div class="card hero-main">
-        <div class="kicker">Premium casino mvp</div>
-        <h1>Elegant casino UI, 7 games, wallet, deposits, and withdrawals.</h1>
-        <p>This project uses a static frontend and a Node.js backend. Deposits are started with Flutterwave checkout, then verified by webhook and transaction verification on the server before crediting the wallet.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="signup.html">Create account</a>
-          <a class="btn btn-secondary" href="lobby.html">Enter lobby</a>
+      <div class="card hero-main cinematic-glow">
+        <div class="kicker">Rally Casino</div>
+        <h1>Play under the lights. Deposit with Telecel MoMo.</h1>
+        <p>
+          A cinematic casino MVP with a premium dark UI, manual deposit approval,
+          and a simple wallet flow. Users can add funds with Telecel, upload a
+          deposit screenshot, and wait for approval.
+        </p>
+
+        <div class="hero-chip-row">
+          <span class="hero-chip">Telecel MoMo</span>
+          <span class="hero-chip">GHS only</span>
+          <span class="hero-chip">Others coming soon</span>
+          <span class="hero-chip">Manual approval</span>
+          <span class="hero-chip">Screenshot upload</span>
         </div>
+
+        <div class="cta-row">
+          <a class="btn btn-primary" href="deposit.html">Deposit Now</a>
+          <a class="btn btn-secondary" href="signup.html">Create Account</a>
+        </div>
+
         <div class="stats">
-          <div class="stat"><b>7</b><span>Games</span></div>
-          <div class="stat"><b>Wallet</b><span>Deposit/Withdraw</span></div>
-          <div class="stat"><b>18+</b><span>Age gate</span></div>
+          <div class="stat">
+            <b>Telecel</b>
+            <span data-momo-number>0209716172</span>
+          </div>
+          <div class="stat">
+            <b>Currency</b>
+            <span data-currency>GHS</span>
+          </div>
+          <div class="stat">
+            <b>More</b>
+            <span data-other-currency>Will be added soon</span>
+          </div>
         </div>
       </div>
+
       <div class="side-stack">
-        <div class="card panel">
-          <h3>Compliance flow</h3>
-          <div class="notice">Age verification, webhook verification, and withdrawal review are all included.</div>
+        <div class="card panel cinematic-glow">
+          <h3>How deposits work</h3>
+          <p class="small">
+            Send money to <b data-momo-network>TELECEL</b> number
+            <b data-momo-number>0209716172</b>, then upload the screenshot
+            and transaction ID.
+          </p>
         </div>
-        <div class="card panel">
-          <h3>Hosting</h3>
-          <p style="color:var(--muted);line-height:1.7">Host the frontend on GitHub Pages. Host the backend on ChemiCloud Node.js cPanel or another Node-capable server.</p>
+
+        <div class="card panel cinematic-glow">
+          <h3>Current wallet</h3>
+          <div class="notice">
+            Balance: <b id="balanceTextMini">GHS 0.00</b>
+          </div>
+          <p class="small" style="margin-top:12px">
+            Deposits stay pending until admin approval.
+          </p>
+        </div>
+
+        <div class="card panel cinematic-glow">
+          <h3>VIP look</h3>
+          <p class="small">
+            Gold accents, deep charcoal panels, glow edges, and cinematic spacing
+            for a premium feel.
+          </p>
         </div>
       </div>
     </section>
+
+    <section style="margin-top:22px" class="card panel cinematic-glow">
+      <h2>Featured experience</h2>
+      <div class="grid-games">
+        <div class="game">
+          <h4>Deposit flow</h4>
+          <p>Amount, transaction ID, screenshot, then pending review.</p>
+          <div class="mini">
+            <span class="tag">Fast</span>
+            <span class="tag">Manual approval</span>
+          </div>
+        </div>
+
+        <div class="game">
+          <h4>Wallet</h4>
+          <p>Track credited funds and pending deposits in one place.</p>
+          <div class="mini">
+            <span class="tag">Simple</span>
+            <span class="tag">Clean</span>
+          </div>
+        </div>
+
+        <div class="game">
+          <h4>Future currencies</h4>
+          <p>We start with GHS and add other currencies later.</p>
+          <div class="mini">
+            <span class="tag">Coming soon</span>
+            <span class="tag">Flexible</span>
+          </div>
+        </div>
+
+        <div class="game">
+          <h4>Admin review</h4>
+          <p>Separate admin site to approve deposits and manage users.</p>
+          <div class="mini">
+            <span class="tag">Separate</span>
+            <span class="tag">Secure</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      © <span data-site-name>Rally Casino</span> • cinematic MVP
+    </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const mini = document.getElementById("balanceTextMini");
+      if (mini) mini.textContent = "GHS 0.00";
+      if (window.refreshWallet) {
+        await window.refreshWallet();
+        const balanceTextMini = document.getElementById("balanceTextMini");
+        if (balanceTextMini && window.state) balanceTextMini.textContent = `GHS ${Number(window.state.wallet.balance || 0).toFixed(2)}`;
+      }
+    });
+  </script>
 </body>
 </html>
