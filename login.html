@@ -17,14 +17,15 @@
         <span>login</span>
       </div>
     </div>
-
     <div class="navlinks">
       <a href="index.html">Home</a>
+      <a href="games.html">Games</a>
       <a href="deposit.html">Deposit</a>
+      <a href="withdraw.html">Withdraw</a>
+      <a href="history.html">History</a>
       <a class="active" href="login.html">Login</a>
       <a href="signup.html">Sign up</a>
     </div>
-
     <div class="wallet">
       <span class="pill" id="userText">Guest</span>
       <span><b id="balanceText">GHS 0.00</b></span>
@@ -32,46 +33,29 @@
   </div>
 
   <div class="container">
-    <div class="hero" style="grid-template-columns:1fr .95fr">
+    <section class="hero">
       <div class="card hero-main cinematic-glow">
         <div class="kicker">Welcome back</div>
         <h1>Login to your Rally account</h1>
         <p>Access your wallet, deposit history, and pending balances from one clean dashboard.</p>
-        <div class="hero-chip-row">
-          <span class="hero-chip">Fast access</span>
-          <span class="hero-chip">Wallet view</span>
-          <span class="hero-chip">Pending deposits</span>
-        </div>
-        <div class="notice" style="margin-top:20px">
-          New here? Go to <a href="signup.html" style="color:#fff2bf;text-decoration:underline">Sign up</a>.
-        </div>
       </div>
 
       <div class="card panel cinematic-glow">
-        <h2 style="margin-bottom:14px">Login</h2>
-
         <form id="loginForm" class="form">
           <input class="field" type="text" name="username" placeholder="Username" required />
           <input class="field" type="password" name="password" placeholder="Password" required />
-
           <div id="hcaptchaBox" class="h-captcha" data-theme="dark"></div>
-
           <button class="btn btn-primary" type="submit">Login</button>
-          <a class="btn btn-secondary" href="signup.html" style="text-align:center">Create account</a>
+          <a class="btn btn-secondary" href="signup.html" style="display:block;text-align:center">Create account</a>
         </form>
-
-        <div class="small" style="margin-top:16px">
-          If you forget your password in this MVP version, create a new account.
-        </div>
       </div>
-    </div>
+    </section>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("loginForm");
-      if (form) form.addEventListener("submit", login);
-      renderCaptcha("hcaptchaBox");
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('loginForm')?.addEventListener('submit', login);
+      renderCaptcha('hcaptchaBox');
     });
   </script>
 </body>
