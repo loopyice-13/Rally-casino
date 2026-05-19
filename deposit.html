@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Deposit</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="brand"><div class="brand-badge">♠</div><div>Casino Royale</div></div>
+    <div class="navlinks">
+      <a href="index.html">Home</a><a href="lobby.html">Lobby</a>
+      <a class="active" href="deposit.html">Deposit</a><a href="withdraw.html">Withdraw</a>
+    </div>
+    <div class="wallet"><span>Balance: <b id="balanceText">GHS 0.00</b></span></div>
+  </div>
+  <div class="container">
+    <div class="game-shell">
+      <div class="game-stage">
+        <h2>Deposit Funds</h2>
+        <p style="color:var(--muted)">Checkout opens through Flutterwave, then the backend verifies the payment before wallet credit.</p>
+        <form class="form" id="depositForm">
+          <input class="field" type="number" name="amount" min="10" placeholder="Amount in GHS" required>
+          <input class="field" type="email" name="email" placeholder="Email" required>
+          <input class="field" name="name" placeholder="Full name" required>
+          <button class="btn btn-primary" type="submit">Start Flutterwave Checkout</button>
+        </form>
+      </div>
+      <div class="card side-card">
+        <h3>Deposit rules</h3>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:18px">
+          <li>Minimum deposit: GHS 10</li>
+          <li>Wallet updates only after verification</li>
+          <li>Webhooks must be enabled in Flutterwave</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script src="deposit.js"></script>
+</body>
+</html>

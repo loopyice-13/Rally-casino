@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Casino Royale</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="nav">
+    <div class="brand"><div class="brand-badge">♠</div><div>Casino Royale</div></div>
+    <div class="navlinks">
+      <a class="active" href="index.html">Home</a>
+      <a href="signup.html">Sign up</a>
+      <a href="login.html">Login</a>
+      <a href="lobby.html">Lobby</a>
+      <a href="deposit.html">Deposit</a>
+      <a href="withdraw.html">Withdraw</a>
+    </div>
+    <div class="wallet">
+      <span class="pill" id="userText">Guest</span>
+      <span>Balance: <b id="balanceText">GHS 0.00</b></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="hero">
+      <div class="card hero-main">
+        <div class="kicker">Premium casino mvp</div>
+        <h1>Elegant casino UI, 7 games, wallet, deposits, and withdrawals.</h1>
+        <p>This project uses a static frontend and a Node.js backend. Deposits are started with Flutterwave checkout, then verified by webhook and transaction verification on the server before crediting the wallet.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="signup.html">Create account</a>
+          <a class="btn btn-secondary" href="lobby.html">Enter lobby</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>7</b><span>Games</span></div>
+          <div class="stat"><b>Wallet</b><span>Deposit/Withdraw</span></div>
+          <div class="stat"><b>18+</b><span>Age gate</span></div>
+        </div>
+      </div>
+      <div class="side-stack">
+        <div class="card panel">
+          <h3>Compliance flow</h3>
+          <div class="notice">Age verification, webhook verification, and withdrawal review are all included.</div>
+        </div>
+        <div class="card panel">
+          <h3>Hosting</h3>
+          <p style="color:var(--muted);line-height:1.7">Host the frontend on GitHub Pages. Host the backend on ChemiCloud Node.js cPanel or another Node-capable server.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

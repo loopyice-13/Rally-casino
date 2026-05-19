@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Lobby</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="brand"><div class="brand-badge">♠</div><div>Casino Royale</div></div>
+    <div class="navlinks">
+      <a href="index.html">Home</a><a class="active" href="lobby.html">Lobby</a>
+      <a href="deposit.html">Deposit</a><a href="withdraw.html">Withdraw</a>
+    </div>
+    <div class="wallet">
+      <span class="pill" id="userText">Guest</span>
+      <span>Balance: <b id="balanceText">GHS 0.00</b></span>
+      <button class="btn btn-secondary" id="loginBtn" onclick="location.href='login.html'">Login</button>
+      <button class="btn btn-secondary" id="logoutBtn" onclick="logout()" style="display:none">Logout</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card panel">
+      <h2>Casino Lobby</h2>
+      <p style="color:var(--muted)">Pick a game and place your stake. Every game opens in a dedicated engine page.</p>
+    </div>
+
+    <div class="grid-games">
+      <div class="game"><h4>Slots</h4><p>Match symbols across 3 reels.</p><div class="mini"><span class="tag">Fast</span><span class="tag">High payout</span></div><a class="btn btn-primary" href="game.html?game=slots">Play</a></div>
+      <div class="game"><h4>Blackjack</h4><p>Beat the dealer without busting.</p><div class="mini"><span class="tag">Strategy</span><span class="tag">Classic</span></div><a class="btn btn-primary" href="game.html?game=blackjack">Play</a></div>
+      <div class="game"><h4>Roulette</h4><p>Bet color, parity, or exact number.</p><div class="mini"><span class="tag">Spin</span><span class="tag">Table</span></div><a class="btn btn-primary" href="game.html?game=roulette">Play</a></div>
+      <div class="game"><h4>Baccarat</h4><p>Back player or banker.</p><div class="mini"><span class="tag">Low house edge</span><span class="tag">Table</span></div><a class="btn btn-primary" href="game.html?game=baccarat">Play</a></div>
+      <div class="game"><h4>Dice</h4><p>Guess high or low.</p><div class="mini"><span class="tag">Quick</span><span class="tag">Simple</span></div><a class="btn btn-primary" href="game.html?game=dice">Play</a></div>
+      <div class="game"><h4>Crash</h4><p>Cash out before the crash.</p><div class="mini"><span class="tag">Real time</span><span class="tag">Risk</span></div><a class="btn btn-primary" href="game.html?game=crash">Play</a></div>
+      <div class="game"><h4>High-Low</h4><p>Guess the next card direction.</p><div class="mini"><span class="tag">Card game</span><span class="tag">Fast</span></div><a class="btn btn-primary" href="game.html?game=highlow">Play</a></div>
+      <div class="game"><h4>Wheel</h4><p>Spin for a bonus multiplier.</p><div class="mini"><span class="tag">Bonus</span><span class="tag">Lucky</span></div><a class="btn btn-primary" href="game.html?game=wheel">Play</a></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>window.onload=async()=>{paintShell(); if(state.token) try{await refreshWallet()}catch{}}</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Withdraw</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="nav">
+    <div class="brand"><div class="brand-badge">♠</div><div>Casino Royale</div></div>
+    <div class="navlinks">
+      <a href="index.html">Home</a><a href="lobby.html">Lobby</a>
+      <a href="deposit.html">Deposit</a><a class="active" href="withdraw.html">Withdraw</a>
+    </div>
+    <div class="wallet"><span>Balance: <b id="balanceText">GHS 0.00</b></span></div>
+  </div>
+  <div class="container">
+    <div class="game-shell">
+      <div class="game-stage">
+        <h2>Withdraw Funds</h2>
+        <p style="color:var(--muted)">Withdrawals are requests first, then approved in the backend admin panel.</p>
+        <form class="form" id="withdrawForm">
+          <div class="two">
+            <input class="field" type="number" name="amount" min="10" placeholder="Amount in GHS" required>
+            <select class="field" name="method">
+              <option value="momo">Mobile Money</option>
+              <option value="bank">Bank Transfer</option>
+            </select>
+          </div>
+          <input class="field" name="accountName" placeholder="Account name" required>
+          <input class="field" name="accountNumber" placeholder="Account number" required>
+          <input class="field" name="reference" placeholder="Reference note">
+          <button class="btn btn-primary" type="submit">Request Withdrawal</button>
+        </form>
+      </div>
+      <div class="card side-card">
+        <h3>Withdrawal rules</h3>
+        <ul style="color:var(--muted);line-height:1.9;padding-left:18px">
+          <li>Minimum withdrawal: GHS 10</li>
+          <li>KYC recommended before approval</li>
+          <li>Admin can approve pending requests</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script src="withdraw.js"></script>
+</body>
+</html>
