@@ -1,14 +1,78 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login • Rally Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <script src="app.js"></script>
-  <script src="auth.js"></script>
-  <script>window.onload=loginView</script>
+  <div class="nav cinematic-glow">
+    <div class="brand">
+      <div class="brand-badge">♠</div>
+      <div class="brand-title">
+        <div data-site-name>Rally Casino</div>
+        <span>login</span>
+      </div>
+    </div>
+
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="deposit.html">Deposit</a>
+      <a class="active" href="login.html">Login</a>
+      <a href="signup.html">Sign up</a>
+    </div>
+
+    <div class="wallet">
+      <span class="pill" id="userText">Guest</span>
+      <span><b id="balanceText">GHS 0.00</b></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="hero" style="grid-template-columns:1fr .95fr">
+      <div class="card hero-main cinematic-glow">
+        <div class="kicker">Welcome back</div>
+        <h1>Login to your Rally account</h1>
+        <p>
+          Access your wallet, deposit history, and pending balances from one clean dashboard.
+          Your session is managed locally for the MVP build.
+        </p>
+
+        <div class="hero-chip-row">
+          <span class="hero-chip">Fast access</span>
+          <span class="hero-chip">Wallet view</span>
+          <span class="hero-chip">Pending deposits</span>
+        </div>
+
+        <div class="notice" style="margin-top:20px">
+          New here? Go to <a href="signup.html" style="color:#fff2bf;text-decoration:underline">Sign up</a>.
+        </div>
+      </div>
+
+      <div class="card panel cinematic-glow">
+        <h2 style="margin-bottom:14px">Login</h2>
+
+        <form id="loginForm" class="form">
+          <input class="field" type="text" name="username" placeholder="Username" required />
+          <input class="field" type="password" name="password" placeholder="Password" required />
+          <button class="btn btn-primary" type="submit">Login</button>
+          <a class="btn btn-secondary" href="signup.html" style="text-align:center">Create account</a>
+        </form>
+
+        <div class="small" style="margin-top:16px">
+          If you forget your password in this MVP version, create a new account.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      if (form) form.addEventListener("submit", login);
+    });
+  </script>
 </body>
 </html>
