@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>History • Rally Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+  <script src="history.js" defer></script>
+</head>
+<body>
+  <div class="nav cinematic-glow">
+    <div class="brand">
+      <div class="brand-badge">♠</div>
+      <div class="brand-title">
+        <div data-site-name>Rally Casino</div>
+        <span>history</span>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="games.html">Games</a>
+      <a href="deposit.html">Deposit</a>
+      <a href="withdraw.html">Withdraw</a>
+      <a class="active" href="history.html">History</a>
+    </div>
+    <div class="wallet">
+      <span class="pill" id="userText">Guest</span>
+      <span><b id="balanceText">GHS 0.00</b></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="card panel cinematic-glow">
+      <h1 style="margin-top:0">Transaction history</h1>
+      <div class="two">
+        <select id="typeFilter" class="field">
+          <option value="all">All types</option>
+          <option value="deposit">Deposits</option>
+          <option value="withdrawal">Withdrawals</option>
+          <option value="game_win">Game wins</option>
+          <option value="game_loss">Game losses</option>
+        </select>
+        <select id="statusFilter" class="field">
+          <option value="all">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+          <option value="approved">Approved</option>
+          <option value="rejected">Rejected</option>
+        </select>
+      </div>
+      <div id="historyList" style="margin-top:16px"></div>
+      <button class="btn btn-secondary" id="loadMoreBtn" style="margin-top:14px">Load more</button>
+    </section>
+  </div>
+</body>
+  </html>
