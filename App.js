@@ -135,4 +135,77 @@ function logout() {
 }
 
 function getCaptchaToken() {
-  return wi
+  return window.hcaptcha ? window.hcaptcha.getResponse() : '';
+}
+
+function resetCaptcha() {
+  if (window.hcaptcha) {
+    try { window.hcaptcha.reset(); } catch {}
+  }
+}
+
+function renderCaptcha(containerId = 'hcaptchaBox') {
+  const box = document.getElementById(containerId);
+  if (!box || !window.hcaptcha || box.dataset.rendered === '1') return;
+  window.hcaptcha.render(box, {
+    sitekey: APP.hcaptchaSiteKey,
+    theme: 'dark'
+  });
+  box.dataset.rendered = '1';
+}
+
+async function signup(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const payload = Object.fromEntries(fd.entries());
+  payload.hcaptchaToken = getCaptchaToken();
+  if (!payload.hcaptchaToken) return toast('Please complete the captcha.', true);
+
+  try {
+    const data = await api('/api/auth/signup', 'POST', payload);
+    setSession(data.user, data.token);
+    resetCaptcha();
+    toast('Account created successfully.');
+    location.href = 'index.html';
+  } catch (err) {
+    resetCaptcha();
+    toast(err.message, true);
+  }
+}
+
+async function login(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const payload = Object.fromEntries(fd.entries());
+  payload.hcaptchaToken = getCaptchaToken();
+  if (!payload.hcaptchaToken) return toast('Please complete the captcha.', true);
+
+  try {
+    const data = await api('/api/auth/login', 'POST', payload);
+    setSession(data.user, data.token);
+    resetCaptcha();
+    toast('Welcome back.');
+    location.href = 'index.html';
+  } catch (err) {
+    resetCaptcha();
+    toast(err.message, true);
+  }
+}
+
+window.APP = APP;
+window.state = state;
+window.api = api;
+window.toast = toast;
+window.paintShell = paintShell;
+window.refreshWallet = refreshWallet;
+window.requireAuth = requireAuth;
+window.logout = logout;
+window.signup = signup;
+window.login = login;
+window.renderCaptcha = renderCaptcha;
+window.resetCaptcha = resetCaptcha;
+
+document.addEventListener('DOMContentLoaded', () => {
+  paintShell();
+  refreshWallet();
+});
