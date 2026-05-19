@@ -1,71 +1,81 @@
-const crypto = require("crypto");
+const crypto = require('crypto');
 
-const users = new Map();
-const deposits = new Map();
+const users = [];
+const sessions = new Map();
+const transactions = [];
 
-function uid() {
-  return crypto.randomBytes(12).toString("hex");
+function uid(prefix) {
+  return `${prefix}_${Date.now()}_${crypto.randomBytes(4).toString('hex')}`;
 }
 
-function makeToken() {
-  return crypto.randomBytes(24).toString("hex");
-}
-
-function getUserByUsername(username) {
-  return users.get(String(username || "").toLowerCase()) || null;
-}
-
-function getUserByToken(token) {
-  for (const user of users.values()) {
-    if (user.token === token) return user;
-  }
-  return null;
+function publicUser(user) {
+  if (!user) return null;
+  const { password, ...rest } = user;
+  return rest;
 }
 
 function createUser({ username, email, phone, password }) {
-  const key = String(username).toLowerCase();
-  if (users.has(key)) return null;
-
   const user = {
-    id: uid(),
+    id: uid('usr'),
     username,
     email,
     phone,
     password,
     balance: 0,
     pending: 0,
-    token: makeToken(),
-    deposits: []
+    createdAt: new Date().toISOString()
   };
-
-  users.set(key, user);
+  users.push(user);
   return user;
 }
 
-function verifyUser(username, password) {
-  const user = getUserByUsername(username);
-  if (!user) return null;
-  if (user.password !== password) return null;
-  user.token = makeToken();
-  return user;
+function findUserByUsername(username) {
+  return users.find(u => u.username === username) || null;
 }
 
-function addDeposit(user, deposit) {
-  deposits.set(deposit.id, deposit);
-  user.deposits.unshift(deposit.id);
+function findUserById(id) {
+  return users.find(u => u.id === id) || null;
 }
 
-function listDeposits() {
-  return [...deposits.values()].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+function authenticate(username, password) {
+  return users.find(u => u.username === username && u.password === password) || null;
+}
+
+function createSession(userId) {
+  const token = uid('tok');
+  sessions.set(token, userId);
+  return token;
+}
+
+function getUserByToken(token) {
+  if (!token) return null;
+  const userId = sessions.get(token);
+  return findUserById(userId);
+}
+
+function addTransaction(tx) {
+  transactions.unshift({
+    id: uid('tx'),
+    ...tx
+  });
+}
+
+function listTransactionsForUser(userId) {
+  return transactions.filter(t => t.userId === userId);
 }
 
 module.exports = {
   users,
-  deposits,
+  sessions,
+  transactions,
+  uid,
+  publicUser,
   createUser,
-  verifyUser,
+  findUserByUsername,
+  findUserById,
+  authenticate,
+  createSession,
   getUserByToken,
-  getUserByUsername,
-  addDeposit,
-  listDeposits
+  addTransaction,
+  listTransactionsForUser
 };
