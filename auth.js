@@ -1,13 +1,7 @@
 const express = require("express");
-const crypto = require("crypto");
+const { createUser, verifyUser } = require("../store");
 
 const router = express.Router();
-
-const users = new Map();
-
-function makeToken() {
-  return crypto.randomBytes(24).toString("hex");
-}
 
 async function verifyHcaptcha(token) {
   const secret = process.env.HCAPTCHA_SECRET_KEY;
@@ -30,14 +24,7 @@ async function verifyHcaptcha(token) {
 
 router.post("/signup", async (req, res) => {
   try {
-    const {
-      username,
-      email,
-      phone,
-      password,
-      confirmPassword,
-      hcaptchaToken
-    } = req.body;
+    const { username, email, phone, password, confirmPassword, hcaptchaToken } = req.body;
 
     if (!username || !email || !phone || !password || !confirmPassword) {
       return res.status(400).json({ error: "All fields are required." });
@@ -47,33 +34,17 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ error: "Passwords do not match." });
     }
 
-    const captchaOk = await verifyHcaptcha(hcaptchaToken);
-    if (!captchaOk) {
-      return res.status(400).json({ error: "Captcha verification failed." });
-    }
+    const ok = await verifyHcaptcha(hcaptchaToken);
+    if (!ok) return res.status(400).json({ error: "Captcha verification failed." });
 
-    const key = username.toLowerCase();
-    if (users.has(key)) {
-      return res.status(400).json({ error: "Username already exists." });
-    }
-
-    const token = makeToken();
-    users.set(key, {
-      username,
-      email,
-      phone,
-      password,
-      balance: 0,
-      pending: 0,
-      deposits: [],
-      token
-    });
+    const user = createUser({ username, email, phone, password });
+    if (!user) return res.status(400).json({ error: "Username already exists." });
 
     res.json({
-      token,
-      user: { username, email, phone }
+      token: user.token,
+      user: { username: user.username, email: user.email, phone: user.phone }
     });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Signup failed." });
   }
 });
@@ -86,26 +57,17 @@ router.post("/login", async (req, res) => {
       return res.status(400).json({ error: "Username and password are required." });
     }
 
-    const captchaOk = await verifyHcaptcha(hcaptchaToken);
-    if (!captchaOk) {
-      return res.status(400).json({ error: "Captcha verification failed." });
-    }
+    const ok = await verifyHcaptcha(hcaptchaToken);
+    if (!ok) return res.status(400).json({ error: "Captcha verification failed." });
 
-    const key = username.toLowerCase();
-    const user = users.get(key);
-
-    if (!user || user.password !== password) {
-      return res.status(400).json({ error: "Invalid login details." });
-    }
-
-    user.token = makeToken();
-    users.set(key, user);
+    const user = verifyUser(username, password);
+    if (!user) return res.status(400).json({ error: "Invalid login details." });
 
     res.json({
       token: user.token,
       user: { username: user.username, email: user.email, phone: user.phone }
     });
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: "Login failed." });
   }
 });
