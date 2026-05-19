@@ -13,17 +13,17 @@
       <div class="brand-badge">♠</div>
       <div class="brand-title">
         <div data-site-name>Rally Casino</div>
-        <span>cinematic mvp</span>
+        <span>vip lobby</span>
       </div>
     </div>
-
     <div class="navlinks">
       <a class="active" href="index.html">Home</a>
+      <a href="games.html">Games</a>
       <a href="deposit.html">Deposit</a>
+      <a href="withdraw.html">Withdraw</a>
+      <a href="history.html">History</a>
       <a href="login.html">Login</a>
-      <a href="signup.html">Sign up</a>
     </div>
-
     <div class="wallet">
       <span class="pill" id="userText">Guest</span>
       <span><b id="balanceText">GHS 0.00</b></span>
@@ -33,129 +33,75 @@
   <div class="container">
     <section class="hero">
       <div class="card hero-main cinematic-glow">
-        <div class="kicker">Rally Casino</div>
-        <h1>Play under the lights. Deposit with Telecel MoMo.</h1>
-        <p>
-          A cinematic casino MVP with a premium dark UI, manual deposit approval,
-          and a simple wallet flow. Users can add funds with Telecel, upload a
-          deposit screenshot, and wait for approval.
-        </p>
-
+        <div class="kicker">VIP lobby</div>
+        <h1>Premium games built for fast action</h1>
+        <p>Gold accents, deep charcoal panels, glow edges, and cinematic spacing create a polished bettor experience.</p>
         <div class="hero-chip-row">
-          <span class="hero-chip">Telecel MoMo</span>
-          <span class="hero-chip">GHS only</span>
-          <span class="hero-chip">Others coming soon</span>
-          <span class="hero-chip">Manual approval</span>
-          <span class="hero-chip">Screenshot upload</span>
+          <span class="hero-chip">Fast</span>
+          <span class="hero-chip">Clean</span>
+          <span class="hero-chip">Simple</span>
+          <span class="hero-chip">Real play</span>
         </div>
-
         <div class="cta-row">
-          <a class="btn btn-primary" href="deposit.html">Deposit Now</a>
-          <a class="btn btn-secondary" href="signup.html">Create Account</a>
+          <a class="btn btn-primary" href="games.html" style="display:inline-block;text-align:center">Enter games</a>
+          <a class="btn btn-secondary" href="deposit.html" style="display:inline-block;text-align:center">Deposit</a>
         </div>
+      </div>
 
+      <div class="card panel cinematic-glow">
+        <div class="kicker">Wallet</div>
+        <h2 style="margin:10px 0 6px">Live status</h2>
         <div class="stats">
           <div class="stat">
-            <b>Telecel</b>
-            <span data-momo-number>0209716172</span>
+            <div class="small">Balance</div>
+            <div style="font-size:1.5rem;font-weight:900" id="homeBalance">GHS 0.00</div>
           </div>
           <div class="stat">
-            <b>Currency</b>
-            <span data-currency>GHS</span>
+            <div class="small">Pending</div>
+            <div style="font-size:1.5rem;font-weight:900" id="pendingText">GHS 0.00</div>
           </div>
           <div class="stat">
-            <b>More</b>
-            <span data-other-currency>Will be added soon</span>
+            <div class="small">Account</div>
+            <div style="font-size:1.5rem;font-weight:900" id="userText2">Guest</div>
           </div>
         </div>
-      </div>
-
-      <div class="side-stack">
-        <div class="card panel cinematic-glow">
-          <h3>How deposits work</h3>
-          <p class="small">
-            Send money to <b data-momo-network>TELECEL</b> number
-            <b data-momo-number>0209716172</b>, then upload the screenshot
-            and transaction ID.
-          </p>
-        </div>
-
-        <div class="card panel cinematic-glow">
-          <h3>Current wallet</h3>
-          <div class="notice">
-            Balance: <b id="balanceTextMini">GHS 0.00</b>
-          </div>
-          <p class="small" style="margin-top:12px">
-            Deposits stay pending until admin approval.
-          </p>
-        </div>
-
-        <div class="card panel cinematic-glow">
-          <h3>VIP look</h3>
-          <p class="small">
-            Gold accents, deep charcoal panels, glow edges, and cinematic spacing
-            for a premium feel.
-          </p>
-        </div>
+        <div class="notice" style="margin-top:14px">Start with GHS. More currencies later.</div>
       </div>
     </section>
 
-    <section style="margin-top:22px" class="card panel cinematic-glow">
-      <h2>Featured experience</h2>
-      <div class="grid-games">
-        <div class="game">
-          <h4>Deposit flow</h4>
-          <p>Amount, transaction ID, screenshot, then pending review.</p>
-          <div class="mini">
-            <span class="tag">Fast</span>
-            <span class="tag">Manual approval</span>
-          </div>
-        </div>
-
-        <div class="game">
-          <h4>Wallet</h4>
-          <p>Track credited funds and pending deposits in one place.</p>
-          <div class="mini">
-            <span class="tag">Simple</span>
-            <span class="tag">Clean</span>
-          </div>
-        </div>
-
-        <div class="game">
-          <h4>Future currencies</h4>
-          <p>We start with GHS and add other currencies later.</p>
-          <div class="mini">
-            <span class="tag">Coming soon</span>
-            <span class="tag">Flexible</span>
-          </div>
-        </div>
-
-        <div class="game">
-          <h4>Admin review</h4>
-          <p>Separate admin site to approve deposits and manage users.</p>
-          <div class="mini">
-            <span class="tag">Separate</span>
-            <span class="tag">Secure</span>
-          </div>
-        </div>
+    <section class="grid-games" style="margin-top:18px">
+      <div class="game">
+        <div class="tag">Hot</div>
+        <h3>Crash Ladder</h3>
+        <p class="small">Ride the multiplier and cash out before the drop.</p>
+        <a class="btn btn-secondary" href="games.html#crash" style="display:inline-block;text-align:center">Play</a>
+      </div>
+      <div class="game">
+        <div class="tag">New</div>
+        <h3>Hi-Lo</h3>
+        <p class="small">Pick higher or lower and test the next card.</p>
+        <a class="btn btn-secondary" href="games.html#hilo" style="display:inline-block;text-align:center">Play</a>
+      </div>
+      <div class="game">
+        <div class="tag">Live</div>
+        <h3>Dice Rush</h3>
+        <p class="small">Choose your target and beat the roll.</p>
+        <a class="btn btn-secondary" href="games.html#dice" style="display:inline-block;text-align:center">Play</a>
+      </div>
+      <div class="game">
+        <div class="tag">Popular</div>
+        <h3>Lucky Wheel</h3>
+        <p class="small">Spin for a clean, fast result loop.</p>
+        <a class="btn btn-secondary" href="games.html#wheel" style="display:inline-block;text-align:center">Play</a>
       </div>
     </section>
 
-    <div class="footer">
-      © <span data-site-name>Rally Casino</span> • cinematic MVP
-    </div>
+    <section class="card panel cinematic-glow" style="margin-top:18px">
+      <h2 style="margin-top:0">Recent activity</h2>
+      <div id="recentActivity" class="small">Loading...</div>
+    </section>
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-      const mini = document.getElementById("balanceTextMini");
-      if (mini) mini.textContent = "GHS 0.00";
-      if (window.refreshWallet) {
-        await window.refreshWallet();
-        const balanceTextMini = document.getElementById("balanceTextMini");
-        if (balanceTextMini && window.state) balanceTextMini.textContent = `GHS ${Number(window.state.wallet.balance || 0).toFixed(2)}`;
-      }
-    });
-  </script>
+  <div class="footer">© Rally Casino</div>
 </body>
-</html>
+              </html>
