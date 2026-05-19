@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sign Up • Rally Casino</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   <script src="app.js" defer></script>
 </head>
 <body>
@@ -35,17 +36,12 @@
       <div class="card hero-main cinematic-glow">
         <div class="kicker">Create account</div>
         <h1>Join Rally Casino</h1>
-        <p>
-          Create your account, track deposits, and prepare your wallet for manual approval.
-          This MVP keeps the flow fast while the admin system is built separately.
-        </p>
-
+        <p>Create your account, track deposits, and prepare your wallet for manual approval.</p>
         <div class="hero-chip-row">
           <span class="hero-chip">GHS wallet</span>
           <span class="hero-chip">Pending deposits</span>
           <span class="hero-chip">Telecel payments</span>
         </div>
-
         <div class="notice" style="margin-top:20px">
           Already have an account? Go to <a href="login.html" style="color:#fff2bf;text-decoration:underline">Login</a>.
         </div>
@@ -60,6 +56,8 @@
           <input class="field" type="tel" name="phone" placeholder="Phone number" required />
           <input class="field" type="password" name="password" placeholder="Password" required />
           <input class="field" type="password" name="confirmPassword" placeholder="Confirm password" required />
+
+          <div id="hcaptchaBox" class="h-captcha" data-theme="dark"></div>
 
           <button class="btn btn-primary" type="submit">Create account</button>
           <a class="btn btn-secondary" href="login.html" style="text-align:center">I already have one</a>
@@ -76,7 +74,8 @@
     document.addEventListener("DOMContentLoaded", () => {
       const form = document.getElementById("signupForm");
       if (form) form.addEventListener("submit", signup);
+      renderCaptcha("hcaptchaBox");
     });
   </script>
 </body>
-  </html>
+</html>
