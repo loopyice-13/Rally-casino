@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Deposit • Rally Casino</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
   <script src="app.js" defer></script>
   <script src="deposit.js" defer></script>
 </head>
@@ -73,6 +74,8 @@
             <img id="preview" class="preview" alt="Screenshot preview" />
           </div>
 
+          <div id="hcaptchaBox" class="h-captcha" data-theme="dark"></div>
+
           <textarea class="field" name="note" placeholder="Optional note for admin review"></textarea>
 
           <button class="btn btn-primary" type="submit">Submit deposit</button>
@@ -111,5 +114,13 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("depositForm");
+      if (form) form.addEventListener("submit", window.handleDepositSubmit);
+      renderCaptcha("hcaptchaBox");
+    });
+  </script>
 </body>
-      </html>
+</html>
