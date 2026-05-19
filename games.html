@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Games • Rally Casino</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+  <script src="games.js" defer></script>
+</head>
+<body>
+  <div class="nav cinematic-glow">
+    <div class="brand">
+      <div class="brand-badge">♠</div>
+      <div class="brand-title">
+        <div data-site-name>Rally Casino</div>
+        <span>games</span>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="deposit.html">Deposit</a>
+      <a href="withdraw.html">Withdraw</a>
+      <a href="history.html">History</a>
+      <a class="active" href="games.html">Games</a>
+    </div>
+    <div class="wallet">
+      <span class="pill" id="userText">Guest</span>
+      <span><b id="balanceText">GHS 0.00</b></span>
+    </div>
+  </div>
+
+  <div class="container">
+    <section class="card panel cinematic-glow">
+      <h1 style="margin-top:0">Games</h1>
+      <p class="small">One game at a time, fast and mobile-friendly.</p>
+      <div class="grid-games">
+        <div class="game" id="crash">
+          <div class="tag">Hot</div>
+          <h3>Crash Ladder</h3>
+          <p class="small">Cash out before the crash.</p>
+          <input class="field" id="crashStake" type="number" min="1" step="0.01" placeholder="Stake">
+          <button class="btn btn-primary" onclick="playCrash()">Play crash</button>
+          <div id="crashResult" class="small"></div>
+        </div>
+
+        <div class="game" id="hilo">
+          <div class="tag">New</div>
+          <h3>Hi-Lo</h3>
+          <p class="small">Guess higher or lower.</p>
+          <input class="field" id="hiloStake" type="number" min="1" step="0.01" placeholder="Stake">
+          <button class="btn btn-primary" onclick="playHiLo('higher')">Higher</button>
+          <button class="btn btn-secondary" onclick="playHiLo('lower')" style="margin-top:8px">Lower</button>
+          <div id="hiloResult" class="small"></div>
+        </div>
+
+        <div class="game" id="dice">
+          <div class="tag">Live</div>
+          <h3>Dice Rush</h3>
+          <p class="small">Beat the number.</p>
+          <input class="field" id="diceStake" type="number" min="1" step="0.01" placeholder="Stake">
+          <button class="btn btn-primary" onclick="playDice()">Roll dice</button>
+          <div id="diceResult" class="small"></div>
+        </div>
+
+        <div class="game" id="wheel">
+          <div class="tag">Popular</div>
+          <h3>Lucky Wheel</h3>
+          <p class="small">Spin and win.</p>
+          <input class="field" id="wheelStake" type="number" min="1" step="0.01" placeholder="Stake">
+          <button class="btn btn-primary" onclick="playWheel()">Spin wheel</button>
+          <div id="wheelResult" class="small"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+  </html>
